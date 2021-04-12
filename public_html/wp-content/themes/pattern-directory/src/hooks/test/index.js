@@ -25,7 +25,7 @@ describe( 'hooks', () => {
 
 			const history = useHistory();
 
-			expect( history.path ).toBeUndefined;
+			expect( history.path ).toBeUndefined();
 		} );
 
 		it( 'should return path as expected', () => {
