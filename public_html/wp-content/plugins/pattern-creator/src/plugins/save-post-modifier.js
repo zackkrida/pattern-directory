@@ -1,17 +1,21 @@
 /**
  * WordPress dependencies
  */
-import { Modal } from '@wordpress/components';
-import { dispatch } from '@wordpress/data';
+import { dispatch, useSelect } from '@wordpress/data';
 import { store } from '@wordpress/editor';
 import { useEffect, useState } from '@wordpress/element';
 import { registerPlugin } from '@wordpress/plugins';
 
+// Save the default Gutenberg Function for use later
+window.gutenbergSavePost = wp.data.dispatch( store ).savePost;
+
 const SavePostModifier = () => {
 	const [ showModal, setShowModal ] = useState( false );
+	const [ showConfirmation, setShowConfirmation ] = useState( false );
+	const isCurrentPostPublished = useSelect( ( select ) => select( 'core/editor' ).isCurrentPostPublished() );
 
 	useEffect( () => {
-		// We don't want the publish sidebar confirmation
+		// We want to replace the publish sidebar with our confirmation window.
 		dispatch( store ).disablePublishSidebar();
 
 		/**
@@ -32,9 +36,17 @@ const SavePostModifier = () => {
 		};
 	}, [] );
 
+	useEffect( () => {
+		setShowConfirmation( isCurrentPostPublished );
+	}, [ isCurrentPostPublished ] );
+
+	if ( showConfirmation ) {
+		// TO DO: Show save confirmation
+	}
+
 	if ( showModal ) {
-		// To Do: This needs to be replaced by the actual UI
-		return <Modal onRequestClose={ () => setShowModal( false ) }>Replace with modal.</Modal>;
+		// TO DO: Show submission modal
+		// Call window.gutenbergSavePost() to save post
 	}
 
 	return null;
