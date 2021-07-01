@@ -16,7 +16,6 @@ import { store as patternStore } from '../../store';
 
 function CategoryContextBar() {
 	const { path } = useRoute();
-	const [ height, setHeight ] = useState( 0 );
 	const [ message, setMessage ] = useState();
 	const [ context ] = useState( {
 		title: '',
@@ -66,13 +65,12 @@ function CategoryContextBar() {
 		}
 	}, [ category, isLoadingPatterns, patterns ] );
 
-	useEffect( () => {
-		const _height = message ? innerRef.current.offsetHeight : 0;
-		setHeight( _height );
-	}, [ message ] );
+	if ( ! message ) {
+		return null;
+	}
 
 	return (
-		<header className="category-context-bar" style={ { height: `${ height }px` } }>
+		<header className="category-context-bar">
 			<div ref={ innerRef }>
 				<h2 className="category-context-bar__copy">
 					<span
