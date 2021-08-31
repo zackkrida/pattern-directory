@@ -3450,7 +3450,7 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@wordpress/dom@^3.2.2":
+"@wordpress/dom@3.2.2", "@wordpress/dom@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@wordpress/dom/-/dom-3.2.2.tgz#f9313b2ccc960b77b48a48c10d6e49a2a304f820"
   integrity sha512-FRhnTsRO5/+fDBDU+Hs8WvMLd5+2eFgnu1jKCoumywqBx7WPJv6b3g5xFsiKliaj7aP1Jk0t55nYHPNMgfwBwA==
